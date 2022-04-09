@@ -13,6 +13,7 @@ func Run(a App) {
 	window, err := SDL.CreateWindow(Title, SDL.WINDOWPOS_CENTERED, SDL.WINDOWPOS_CENTERED, int32(Width), int32(Height), SDL.WINDOW_SHOWN)
 	CheckError(err)
 	defer window.Destroy()
+	Window = window
 
 	rend, err := SDL.CreateRenderer(window, -1, SDL.RENDERER_ACCELERATED)
 	CheckError(err)
@@ -37,7 +38,7 @@ func Run(a App) {
 		a.Render(rend)
 		rend.Present()
 
-		wait := int64(1.0/float64(TargetFPS)*1000) - (int64(SDL.GetTicks()) - int64(start))
+		wait := int64(1.0/float64(FpsCap)*1000) - (int64(SDL.GetTicks()) - int64(start))
 
 		if wait >= 0 {
 			SDL.Delay(uint32(wait))

@@ -1,14 +1,27 @@
 package pixapp
 
+import SDL "github.com/veandco/go-sdl2/sdl"
+
 var (
-	Title     string = "pix-app"
-	Width     int    = 360
-	Height    int    = 180
-	Running   bool   = false
-	TargetFPS int    = 60
+	Window  *SDL.Window
+	Title   string = "pix-app"
+	Width   int    = 360
+	Height  int    = 180
+	Running bool   = false
+	FpsCap  int    = 60
 )
 
-func SetWindowTitle(t string) { Title = t }
-func SetWindowWidth(w int)    { Width = w }
-func SetWindowHeight(h int)   { Height = h }
-func SetTargetFPS(t int)      { TargetFPS = t }
+func SetTitle(t string) {
+	Title = t
+	Window.SetTitle(t)
+}
+
+func SetSize(w, h int) {
+	Width = w
+	Height = h
+	Window.SetSize(int32(w), int32(h))
+}
+
+func SetFpsCap(f int) {
+	FpsCap = f
+}

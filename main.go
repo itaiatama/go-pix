@@ -21,10 +21,9 @@ func (a *App) Update(dt float64) {}
 func (a *App) Render(R *SDL.Renderer) {}
 
 func main() {
-	pixapp.SetWindowTitle("GO PIX EXAMPLE")
-	pixapp.SetWindowWidth(640)
-	pixapp.SetWindowHeight(360)
-	pixapp.SetTargetFPS(120)
+	pixapp.SetTitle("GO PIX EXAMPLE")
+	pixapp.SetSize(640, 360)
+	pixapp.SetFpsCap(120)
 
 	pixapp.Run(&App{})
 }
