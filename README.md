@@ -6,7 +6,9 @@ Contains several modules:
 	- Drawing simple shapes (only rectangels for now).
 	- Drawing textures and sub-textures.
 	- Drawing text with loaded font.
-* `pix-ui` - simple [`imgui`](https://en.wikipedia.org/wiki/Immediate_mode_GUI) module (only one ugly button for now).
+* `pix-ui` - simple [`imgui`](https://en.wikipedia.org/wiki/Immediate_mode_GUI) module (ugly for now):
+	- Simple solid color button.
+	- Simple soild color button with text.
 
 ## To try
 ```
