@@ -5,6 +5,7 @@ Contains several modules:
 * `pix-ext` - extension module:
 	- Drawing simple shapes (only rectangels for now).
 	- Drawing textures and sub-textures.
+	- Drawing text with loaded font.
 * `pix-ui` - simple [`imgui`](https://en.wikipedia.org/wiki/Immediate_mode_GUI) module (only one ugly button for now).
 
 ## To try
