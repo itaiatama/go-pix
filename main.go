@@ -7,14 +7,17 @@ import (
 	pixext "github.com/itaiatama/go-pix/pix-ext"
 	pixui "github.com/itaiatama/go-pix/pix-ui"
 	SDL "github.com/veandco/go-sdl2/sdl"
+	TTF "github.com/veandco/go-sdl2/ttf"
 )
 
 type App struct {
 	tex *SDL.Texture
+	fnt *TTF.Font
 }
 
 func (a *App) Init() {
-	a.tex = pixapp.LoadTexture("assets/tex.png")
+	a.tex = pixapp.LoadTexture("assets/textures/tex.png")
+	a.fnt = pixapp.LoadFont("assets/fonts/m6x11.ttf", 24)
 }
 
 func (a *App) Event(event SDL.Event) {
@@ -35,8 +38,8 @@ func (a *App) Render(R *SDL.Renderer) {
 	pixui.Button(R, 3, 10, 10)
 	pixui.End()
 
-	pixext.DrawTexture(R, a.tex, 100, 100, 64, 64)
-	pixext.DrawSubTexture(R, a.tex, 0, 0, 16, 16, 200, 100, 64, 64)
+	pixext.DrawText(R, a.fnt, "Hello, World!", color.RGBA{255, 255, 255, 255}, 100, 100)
+	pixext.DrawSubTexture(R, a.tex, 0, 0, 16, 16, 200, 200, 64, 64)
 
 }
 

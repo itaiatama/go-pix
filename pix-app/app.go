@@ -5,6 +5,7 @@ import (
 
 	IMG "github.com/veandco/go-sdl2/img"
 	SDL "github.com/veandco/go-sdl2/sdl"
+	TTF "github.com/veandco/go-sdl2/ttf"
 )
 
 func Exit() { Running = false }
@@ -17,9 +18,20 @@ func LoadTexture(path string) *SDL.Texture {
 	return tex
 }
 
+func LoadFont(path string, size int) *TTF.Font {
+	font, err := TTF.OpenFont(path, size)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return font
+}
+
 func Run(a App) {
 	CheckError(SDL.Init(SDL.INIT_EVERYTHING))
 	defer SDL.Quit()
+
+	CheckError(TTF.Init())
+	defer TTF.Quit()
 
 	window, err := SDL.CreateWindow(Title, SDL.WINDOWPOS_CENTERED, SDL.WINDOWPOS_CENTERED, int32(Width), int32(Height), SDL.WINDOW_SHOWN)
 	CheckError(err)
