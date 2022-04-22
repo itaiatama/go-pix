@@ -2,7 +2,9 @@
 Simple golang graphics [`framework`](https://en.wikipedia.org/wiki/Application_framework) ([go-sdl2](https://github.com/veandco/go-sdl2) wrapper).
 Contains several modules: 
 * `pix-app` - core module that provides `Application` interface and contains main application logic.
-* `pix-ext` - extension module (draw rect for now).
+* `pix-ext` - extension module:
+	- Drawing simple shapes (only rectangels for now).
+	- Drawing textures and sub-textures.
 * `pix-ui` - simple [`imgui`](https://en.wikipedia.org/wiki/Immediate_mode_GUI) module (only one ugly button for now).
 
 ## To try
