@@ -1,10 +1,21 @@
 package pixapp
 
 import (
+	"log"
+
+	IMG "github.com/veandco/go-sdl2/img"
 	SDL "github.com/veandco/go-sdl2/sdl"
 )
 
 func Exit() { Running = false }
+
+func LoadTexture(path string) *SDL.Texture {
+	tex, err := IMG.LoadTexture(Renderer, path)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return tex
+}
 
 func Run(a App) {
 	CheckError(SDL.Init(SDL.INIT_EVERYTHING))
@@ -15,9 +26,10 @@ func Run(a App) {
 	defer window.Destroy()
 	Window = window
 
-	rend, err := SDL.CreateRenderer(window, -1, SDL.RENDERER_ACCELERATED)
+	renderer, err := SDL.CreateRenderer(window, -1, SDL.RENDERER_ACCELERATED)
 	CheckError(err)
-	defer rend.Destroy()
+	defer renderer.Destroy()
+	Renderer = renderer
 
 	Running = true
 
@@ -35,8 +47,8 @@ func Run(a App) {
 
 		a.Update(delta)
 
-		a.Render(rend)
-		rend.Present()
+		a.Render(renderer)
+		renderer.Present()
 
 		wait := int64(1.0/float64(FpsCap)*1000) - (int64(SDL.GetTicks()) - int64(start))
 
