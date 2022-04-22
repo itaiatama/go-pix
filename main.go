@@ -17,7 +17,7 @@ type App struct {
 
 func (a *App) Init() {
 	a.tex = pixapp.LoadTexture("assets/textures/tex.png")
-	a.fnt = pixapp.LoadFont("assets/fonts/m6x11.ttf", 24)
+	a.fnt = pixapp.LoadFont("assets/fonts/m6x11.ttf", 16)
 }
 
 func (a *App) Event(event SDL.Event) {
@@ -36,6 +36,7 @@ func (a *App) Render(R *SDL.Renderer) {
 
 	pixui.Begin()
 	pixui.Button(R, 3, 10, 10)
+	pixui.ButtonText(R, a.fnt, "Button", 6, 100, 10, 8)
 	pixui.End()
 
 	pixext.DrawText(R, a.fnt, "Hello, World!", color.RGBA{255, 255, 255, 255}, 100, 100)
