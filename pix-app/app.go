@@ -14,15 +14,15 @@ func Run(a App) {
 	CheckError(TTF.Init())
 	defer TTF.Quit()
 
-	window, err := SDL.CreateWindow(Title, SDL.WINDOWPOS_CENTERED, SDL.WINDOWPOS_CENTERED, int32(Width), int32(Height), SDL.WINDOW_SHOWN)
-	CheckError(err)
-	defer window.Destroy()
-	Window = window
+	var err error = nil
 
-	renderer, err := SDL.CreateRenderer(window, -1, SDL.RENDERER_ACCELERATED)
+	Window, err = SDL.CreateWindow(Title, SDL.WINDOWPOS_CENTERED, SDL.WINDOWPOS_CENTERED, int32(Width), int32(Height), SDL.WINDOW_SHOWN)
 	CheckError(err)
-	defer renderer.Destroy()
-	Renderer = renderer
+	defer Window.Destroy()
+
+	Renderer, err = SDL.CreateRenderer(Window, -1, SDL.RENDERER_ACCELERATED)
+	CheckError(err)
+	defer Renderer.Destroy()
 
 	Running = true
 
@@ -39,9 +39,8 @@ func Run(a App) {
 		}
 
 		a.Update(delta)
-
-		a.Render(renderer)
-		renderer.Present()
+		a.Render(Renderer)
+		Renderer.Present()
 
 		wait := int64(1.0/float64(FpsCap)*1000) - (int64(SDL.GetTicks()) - int64(start))
 
@@ -51,4 +50,6 @@ func Run(a App) {
 
 		delta = (float64(SDL.GetTicks()) - float64(start)) / 1000.0
 	}
+
+	a.Destroy()
 }

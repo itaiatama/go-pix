@@ -7,4 +7,5 @@ type App interface {
 	Event(SDL.Event)
 	Update(float64)
 	Render(*SDL.Renderer)
+	Destroy()
 }
