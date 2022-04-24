@@ -1,30 +1,11 @@
 package pixapp
 
 import (
-	"log"
-
-	IMG "github.com/veandco/go-sdl2/img"
 	SDL "github.com/veandco/go-sdl2/sdl"
 	TTF "github.com/veandco/go-sdl2/ttf"
 )
 
 func Exit() { Running = false }
-
-func LoadTexture(path string) *SDL.Texture {
-	tex, err := IMG.LoadTexture(Renderer, path)
-	if err != nil {
-		log.Fatal(err)
-	}
-	return tex
-}
-
-func LoadFont(path string, size int) *TTF.Font {
-	font, err := TTF.OpenFont(path, size)
-	if err != nil {
-		log.Fatal(err)
-	}
-	return font
-}
 
 func Run(a App) {
 	CheckError(SDL.Init(SDL.INIT_EVERYTHING))

@@ -2,11 +2,9 @@ package pixui
 
 import (
 	"image/color"
-	"log"
 
 	pixext "github.com/itaiatama/go-pix/pix-ext"
 	SDL "github.com/veandco/go-sdl2/sdl"
-	TTF "github.com/veandco/go-sdl2/ttf"
 )
 
 type State struct {
@@ -61,44 +59,6 @@ func Button(R *SDL.Renderer, ID, x, y int) bool {
 		pixext.DrawFillRect(R, x, y, 64, 48, GREEN)
 	}
 
-	return (!s.ML && s.Hot == ID && s.Active == ID)
-}
-
-func ButtonText(R *SDL.Renderer, F *TTF.Font, text string, ID, x, y, p int) bool {
-
-	surface, err := F.RenderUTF8Solid(text, SDL.Color(WHITE))
-
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	texture, err := R.CreateTextureFromSurface(surface)
-
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	w := int(surface.W)
-	h := int(surface.H)
-
-	if InRect(x-p/2, y-p/2, w+p, h+p) {
-		s.Hot = ID
-		if s.Active == 0 && s.ML {
-			s.Active = ID
-		}
-	}
-
-	if s.Hot == ID {
-		if s.Active == ID {
-			pixext.DrawFillRect(R, x-p/2, y-p/2, w+p, h+p, RED)
-		} else {
-			pixext.DrawFillRect(R, x-p/2, y-p/2, w+p, h+p, BLUE)
-		}
-	} else {
-		pixext.DrawFillRect(R, x-p/2, y-p/2, w+p, h+p, GREEN)
-	}
-
-	pixext.DrawTexture(R, texture, x, y, w, h)
 	return (!s.ML && s.Hot == ID && s.Active == ID)
 }
 
